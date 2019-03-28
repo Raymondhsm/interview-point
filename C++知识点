@@ -1,0 +1,9 @@
+1、智能指针模板
+	auto_ptr和shared_ptr 只能用于new
+	unique_ptr能用于new 和 new[]
+	
+	auto_ptr不安全
+	unique_ptr只有一个指针拥有内存块的拥有权，把其赋值给unique_ptr会报错
+	shared_ptr使用计数，有一个指向就加一，直到计数为零时才调用delete
+	
+2、
