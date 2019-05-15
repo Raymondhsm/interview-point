@@ -80,7 +80,7 @@ int main()
 ### 8、typeof 和 define 的区别（```typedef int（*funName）（）```）
 * __原理__：define不做类型检查，只做替换，是预处理指令；typedef做类型检查，能在一个函数定义里面使用typedef
 * __功能__：define可以定义类型别名，常量、变量、编译开关等；typedef一般只定义类型别名
-* __作用域__：define全局；typedef不明？？？
+* __作用域__：define本文件；typedef函数外则到文件结尾，函数内则到函数结束
 * __指针操作__：
 ```
 #define INTPTR1 int*
