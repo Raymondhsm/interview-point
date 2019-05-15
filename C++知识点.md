@@ -17,7 +17,7 @@
 	4. 使用dynamic_cast进行转换的，基类中一定要有虚函数，否则编译不通过。
 	
 ### 3、malloc和new区别
-    https://blog.csdn.net/nie19940803/article/details/76358673
+* https://blog.csdn.net/nie19940803/article/details/76358673
     
     
 ### 4、static关键字总结（作用域、生命周期）
