@@ -10,4 +10,14 @@
   > 连续模式：穿过但触发碰撞
   > 动态连续模式：不能穿过并触发碰撞
   
-### 3. 碰撞 
+### 2. 射线（Ray，RaycastHit）
+* ray类为射线类，RaycastHit用于储存射线碰撞的信息
+* 创建一条射线Ray需要指明射线的起点（origin）和射线的方向（direction）。这两个参数也是Ray的成员变量。注意，射线的方向在设置时如果未单位化，Unity 3D会自动进行单位归一化处理。
+```
+public static bool Raycast(Vector3 origin, Vector3 direction, float distance=Mathf.Infinity, intlayerMask=DefaultRaycastLayers); 
+public static bool Raycast(Vector3 origin, Vector3 direction, RaycastHit hitInfo, float distance =Mathf.Infinity, int layerMask = DefaultRaycastLayers); 
+public Ray ScreenPointToRay(Vector3 position);
+```
+* hit中有name，normal等，还有碰撞三角形片元的纹理（两个），光照纹理，collider，rigidbody等
+
+### 3. 碰撞
