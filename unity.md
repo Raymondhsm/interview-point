@@ -21,3 +21,16 @@ public Ray ScreenPointToRay(Vector3 position);
 * hit中有name，normal等，还有碰撞三角形片元的纹理（两个），光照纹理，collider，rigidbody等
 
 ### 3. 碰撞
+#### Collider
+  * ClosestPointOnBounds 变量可以计算某一定点到包围盒的最短距离，用于计算爆炸
+  * __isTrigger 是否为触发器，就不会有物理性质__
+  * 相比OnTriggerEnter，OnCollisionEnter传递Collision类而不是Collider。Collision类包含接触点，碰撞速度等信息。在这个函数如果你不使用collisionInfo，删去collisionInfo参数以避免不必要的计算。注意，__如果碰撞器附加一个非动力学刚体，也仅发送碰撞事件。__
+  * 每帧调用OnCollisionStay,但 __OnTriggerStay函数是基于物理计时器，因此它未必每帧都运行__ 。也就是说OnTriggerStay是在每一个Time.fixedDeltaTime的时间节点上运行，不是Time.deltaTime的时间节点上运行
+#### Collision
+  * 每一个接触（contact）包含一个接触点、法线和两个碰撞的碰撞器（看ContactPoint）。在OnCollisionStay或OnCollisionEnter里你确保contacts至少有一个元素。
+  * relativeVelocity(相对速度), rigidbody, transform
+  
+
+
+
+
