@@ -141,4 +141,48 @@ INTPTR2 const p3 = &c;    //指针常量
 
 #### 
 
-### 9
+### 9. 函数指针
+
+- ##### 格式
+  
+  - `int (*pfun)(int, int);`
+  
+  - 因为括号优先级比`*`高，所以要用括号`*pfun`
+
+- ##### 函数指针&指针函数区别
+  
+  - 函数指针是指向函数的**指针**
+    
+    > `int (*pfun)(int, int);`
+  
+  - 指针函数是返回值为指针的**函数**
+    
+    > `int *pfun (int, int);`
+
+- ##### 复杂情况
+  
+  - 返回值为函数指针
+    
+    > `int (*pfun(int))(int,int)`
+    > 
+    > `pfun`先与`(int)`结合，说明`pfun`是一个参数为`int`的函数，再与`*`结合表示其返回值为`int(*)(int,int)`的函数
+  
+  - 参数为函数指针
+    
+    > `int fun(int, void(*)(int))`
+    > 
+    > 参数中`void(*)(int)`表示一个函数指针
+  
+  - 返回值和参数都为函数指针
+    
+    > `int (*pfun(int, void(*)(int)))(int,int)`
+
+- ##### 建议书写
+  
+  - 使用typedef来定义函数指针，方便返回值，参数传递等
+    
+    > `typedef void(*PF)(int);`
+    > 
+    > `PF signal(int, void (*)(int))`
+
+
