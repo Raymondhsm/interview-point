@@ -323,22 +323,24 @@ int main(){
 
 - **C++数据类型大小**
   
-  | 类型            | 32位   | 64位   |
-  |:-------------:|:-----:|:-----:|
-  | bool          | 1     | 1     |
-  | char          | 1     | 1     |
-  | short         | 2     | 2     |
-  | unsigned int  | 4     | 4     |
-  | int           | 4     | 4     |
-  | long          | 4     | 4     |
-  | long long     | 8     | 8     |
-  | unsigned long | 4     | 4     |
-  | float         | 4     | 4     |
-  | double        | 8     | 8     |
-  | long double   | 8     | 8     |
-  | void *(指针)    | **4** | **8** |
+  | 类型             | 32位   | 64位   |
+  |:--------------:|:-----:|:-----:|
+  | bool           | 1     | 1     |
+  | char           | 1     | 1     |
+  | short          | 2     | 2     |
+  | unsigned int   | 4     | 4     |
+  | int            | 4     | 4     |
+  | long           | 4     | 4     |
+  | long long      | 8     | 8     |
+  | unsigned long  | 4     | 4     |
+  | float          | 4     | 4     |
+  | double         | 8     | 8     |
+  | long double    | 8     | 8     |
+  | **void *(指针)** | **4** | **8** |
 
 - **内存对齐原则**
+  
+  - 对齐系数`#program pack(n)`
   
   - 原则一:存放的首地址偏移量 % min(当前类型大小,对齐系数) == 0
   
@@ -379,3 +381,57 @@ int main(){
     - 指向数组的指针
     
     - `int (*p)[n]`
+
+
+
+### 16. C++ 11 新特性
+
+- **auto关键字**
+  
+  - 通知编译器去根据初始化代码推断所声明变量的真实类型。
+  
+  - 一般来说，auto不能用来声明函数的返回值
+  
+  - auto不能用于函数传参以及数组类型推导
+
+- **nullptr**  
+  
+  - 以前都是用0来表示空指针的，但由于0可以被隐式类型转换为整形，这就会存在一些问题。
+  
+  - nullptr和任何指针类型以及类成员指针类型的空值之间可以发生隐式类型转换，同样也可以隐式转换为bool型（取值为false）。
+
+- **基于范围的for循环**
+  
+  - ```cpp
+    int arr[] = {1,2,3,4,5};
+    for(int& e : arr) 
+    {
+      e = e*e;
+    }
+    ```
+
+- `lambda`表达式
+  
+  - **[capture list] (parameter list) ->return type { function body }**
+
+- 新增`share_ptr & weak_ptr`
+  
+  - 将一个weak_ptr绑定到一个shared_ptr不会改变shared_ptr的引用计数。
+  
+  - 不论是否有weak_ptr指向，一旦最后一个指向对象的shared_ptr被销毁，对象就会被释放。
+
+- 初始化列表
+  
+  - **对象的成员变量的初始化动作发生在进入构造函数本体之前**。
+  
+  ```cpp
+  RatedPlayer::RatedPlayer(int r, const string &fn): 
+  TableTennisPlayer(fn) //此为初始化
+
+  {
+      rating = r;    //此为赋值
+
+  }
+  ```
+
+- 右值引用
