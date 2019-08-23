@@ -382,8 +382,6 @@ int main(){
     
     - `int (*p)[n]`
 
-
-
 ### 16. C++ 11 新特性
 
 - **auto关键字**
@@ -427,11 +425,97 @@ int main(){
   ```cpp
   RatedPlayer::RatedPlayer(int r, const string &fn): 
   TableTennisPlayer(fn) //此为初始化
-
+  
   {
       rating = r;    //此为赋值
-
+  
   }
   ```
 
 - 右值引用
+
+###### 
+
+### 17. 常量引用
+
+- 关于引用的初始化有两点值得注意：
+  
+  - 当初始化值是一个左值（可以取得地址）时，没有任何问题；
+  
+  - 当**初始化值不是一个左值**时，则只能对一个**const**  T&（常量引用）赋值。
+  
+  ```cpp
+  double& dr = 1; // 错误：需要左值
+
+  const double& cdr = 1; // ok
+
+  //第二句实际的过程如下：
+
+  double temp = double(1);
+
+  const double& cdr = temp;
+  ```
+
+- 作为函数参数传递时
+
+```cpp
+//使用常量引用就可以这样传
+void fun(const int &i){}
+
+fun(1); //调用。如果不是常量引用，由于1不是可修改的左值，会错误
+```
+
+- 通过常量引用从函数返回一个局部变量（这么做一般是不对的）
+
+```cpp
+//返回值回无效，因为函数结束t会被destory
+T & fun(){ T t; return t;}
+//这样的话，t的生命周期会一直到达ttt结束为止
+const T & fun(){T t; return t;}
+const T &ttt = fun();
+```
+
+###### 
+
+### 18. 模板函数（泛化与特化）
+
+```cpp
+template<typename T>
+template<class T>
+```
+
+- **特化**
+  
+  - 模板类或函数需要对某些类型进行特化处理。
+  
+  - 全特化：全部模板量都特殊化
+  
+  - 偏特化：部分模板量进行特殊化
+
+```cpp
+//模板类
+template<class T1, class T2>
+class A{}
+
+//类的全特化
+template<>
+class A<B, C>{}
+
+//类的偏特化
+template<class T2>
+class A<B, T2>{}
+
+//特殊偏特化
+template<class T1, class T2>
+class A<vector<T1>,T2>
+
+//模板函数
+template<typename T>
+void fun(){}
+
+//函数的全特化
+template<>
+void fun<int>(){}
+```
+
+
